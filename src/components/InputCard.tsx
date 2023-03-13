@@ -2,15 +2,21 @@
 import { css } from "@emotion/react";
 
 const cardStyle = css`
-  border-radius: 10px;
-  border: 1px solid #000;
-  width: fit-content;
   padding: 20px;
-  transform: skew(0deg, 10deg);
+  transform: skew(0deg, 3deg);
+  margin: 25px auto;
+  background-color: #fff;
 `;
 
 const inputStyle = css`
   font-size: 72pt;
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: center;
+  :focus {
+    outline: none;
+  }
 `;
 
 export type Props = {
@@ -20,7 +26,7 @@ export type Props = {
 function InputCard({ lang }: Props) {
   return (
     <div css={cardStyle}>
-      <input type="text" lang={lang} css={inputStyle}></input>
+      <input type="text" lang={lang} css={inputStyle} placeholder="..."></input>
     </div>
   );
 }

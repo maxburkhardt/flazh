@@ -2,13 +2,13 @@
 import { css } from "@emotion/react";
 
 const cardStyle = css`
-  border-radius: 10px;
-  border: 1px solid #000;
   text-align: center;
   font-size: 72pt;
-  width: fit-content;
   padding: 20px;
-  transform: skew(0deg, -10deg);
+  transform: skew(0deg, 3deg);
+  margin: 25px auto;
+  background-color: #000;
+  color: #fff;
 `;
 
 export type Props = {

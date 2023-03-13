@@ -5,6 +5,7 @@ import InputCard from "./components/InputCard";
 
 const appStyle = css`
   text-align: center;
+  min-width: 1000px;
 `;
 
 function App() {
