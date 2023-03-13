@@ -8,6 +8,8 @@ declare module "@emotion/react" {
       displayForeground: string;
       inputBackground: string;
       inputForeground: string;
+      danger: string;
+      success: string;
     };
   }
 }

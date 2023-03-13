@@ -6,6 +6,8 @@ const day: Theme = {
     displayForeground: "#fff",
     inputBackground: "#fff",
     inputForeground: "#000",
+    danger: "#1435ab",
+    success: "#ab1414",
   },
 };
 const night: Theme = {
@@ -15,6 +17,8 @@ const night: Theme = {
     displayForeground: "#000",
     inputBackground: "#000",
     inputForeground: "#fff",
+    danger: "#1435ab",
+    success: "#ab1414",
   },
 };
 
