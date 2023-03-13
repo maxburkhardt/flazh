@@ -1,14 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
+import DisplayCard from "./components/DisplayCard";
+import InputCard from "./components/InputCard";
 
 const appStyle = css`
   text-align: center;
-`
+`;
 
 function App() {
   return (
     <div css={appStyle}>
-      你好
+      <DisplayCard>你好</DisplayCard>
+      <DisplayCard>我是中国人</DisplayCard>
+      <InputCard lang="zh-Hans" />
     </div>
   );
 }
