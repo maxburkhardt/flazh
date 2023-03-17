@@ -1,12 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import { css, useTheme } from "@emotion/react";
+import { useSpring, animated } from "@react-spring/web";
+import { useEffect, useRef } from "react";
 
 export type Props = {
+  color: string;
   children?: React.ReactNode;
 };
 
-function DisplayCard({ children }: Props) {
+function DisplayCard({ color, children }: Props) {
   const theme = useTheme();
+  const [springs, api] = useSpring(() => ({
+    from: { backgroundColor: theme.colors.displayBackground },
+  }));
+  const priorColor = useRef(theme.colors.displayBackground);
+  useEffect(() => {
+    if (priorColor.current !== color) {
+      api.start({
+        from: {
+          backgroundColor: priorColor.current,
+        },
+        to: {
+          backgroundColor: color,
+        },
+      });
+      priorColor.current = color;
+    }
+  }, [color, api]);
   const cardStyle = css`
     text-align: center;
     font-size: 72pt;
@@ -16,7 +36,11 @@ function DisplayCard({ children }: Props) {
     background-color: ${theme.colors.displayBackground};
     color: ${theme.colors.displayForeground};
   `;
-  return <div css={cardStyle}>{children}</div>;
+  return (
+    <animated.div css={cardStyle} style={{ ...springs }}>
+      {children}
+    </animated.div>
+  );
 }
 
 export default DisplayCard;
