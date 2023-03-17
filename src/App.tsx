@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { night } from "./theme";
-import GameContainer from "./GameContainer";
+import GameContainer from "./components/GameContainer";
 
 function App() {
   const [theme, updateTheme] = useState(night);

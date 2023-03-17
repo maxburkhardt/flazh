@@ -4,7 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import { useEffect, useRef } from "react";
 
 export type Props = {
-  color: string;
+  color?: string;
   children?: React.ReactNode;
 };
 
@@ -24,9 +24,9 @@ function DisplayCard({ color, children }: Props) {
           backgroundColor: color,
         },
       });
-      priorColor.current = color;
+      priorColor.current = color ?? theme.colors.displayBackground;
     }
-  }, [color, api]);
+  }, [color, api, theme.colors.displayBackground]);
   const cardStyle = css`
     text-align: center;
     font-size: 72pt;
