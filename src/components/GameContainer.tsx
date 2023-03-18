@@ -2,9 +2,11 @@
 import { css, useTheme, Theme } from "@emotion/react";
 import { useState } from "react";
 import DisplayCard from "./DisplayCard";
-import InputCard from "./InputCard";
 import { day } from "../theme";
 import { getDisplayForMode, Word, WORDS } from "../vocabulary";
+import Button from "./Button";
+import TextEntryCard from "./TextEntryCard";
+import InputCard from "./InputCard";
 
 export type Props = {
   updateTheme: (t: Theme) => void;
@@ -26,16 +28,21 @@ function GameContainer({ updateTheme }: Props) {
   );
   const [mode, setMode] = useState<GameMode>("办法一");
   const [currentWord, setCurrentWord] = useState<Word>(WORDS[0]);
+  const [textEntry, setTextEntry] = useState("");
   return (
     <div css={style}>
       <DisplayCard>{mode}</DisplayCard>
       <DisplayCard color={displayColor}>
         {getDisplayForMode(currentWord, mode)}
       </DisplayCard>
-      <InputCard lang="zh-Hans" />
-      <DisplayCard color={displayColor}>
-        <button onClick={() => updateTheme(day)}>Change Theme</button>
-        <button
+      <TextEntryCard
+        value={textEntry}
+        onChange={(e) => setTextEntry(e.target.value)}
+        lang="zh-Hans"
+      />
+      <InputCard>
+        <Button onClick={() => updateTheme(day)}>Change Theme</Button>
+        <Button
           onClick={() => {
             setDisplayColor(theme.colors.danger);
             setTimeout(
@@ -45,10 +52,10 @@ function GameContainer({ updateTheme }: Props) {
           }}
         >
           Danger
-        </button>
-        <button onClick={() => setMode("办法二")}>Mode switch</button>
-        <button onClick={() => setCurrentWord(WORDS[1])}>New word</button>
-      </DisplayCard>
+        </Button>
+        <Button onClick={() => setMode("办法二")}>Mode switch</Button>
+        <Button onClick={() => setCurrentWord(WORDS[1])}>New word</Button>
+      </InputCard>
     </div>
   );
 }
