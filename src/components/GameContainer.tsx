@@ -2,7 +2,7 @@
 import { css, useTheme, Theme } from "@emotion/react";
 import { useState } from "react";
 import DisplayCard from "./DisplayCard";
-import { day } from "../theme";
+import { day, night } from "../theme";
 import { getAnswerForMode, getDisplayForMode, getWord } from "../vocabulary";
 import Button from "./Button";
 import TextEntryCard from "./TextEntryCard";
@@ -58,8 +58,9 @@ function GameContainer({ updateTheme }: Props) {
       />
       <InputCard>
         <Button onClick={evaluateAnswer}>&nbsp;&rarr;&nbsp;</Button>
-        <Button onClick={() => updateTheme(day)}>Change Theme</Button>
-        <Button onClick={() => setMode((mode + 1) % 3)}>Mode switch</Button>
+        <Button onClick={() => updateTheme(day)}>&#x2600;</Button>
+        <Button onClick={() => updateTheme(night)}>&#x263e;</Button>
+        <Button onClick={() => setMode((mode + 1) % 3)}>&#x2398;</Button>
       </InputCard>
     </div>
   );

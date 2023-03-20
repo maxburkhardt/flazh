@@ -15,6 +15,7 @@ function Button({ onClick, children }: Props) {
     padding: 10px;
     margin: 20px;
     font-size: 72pt;
+    height: 2em;
     :hover {
       background-color: ${theme.colors.success};
     }

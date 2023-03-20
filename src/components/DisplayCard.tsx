@@ -10,7 +10,7 @@ export type Props = {
 
 function DisplayCard({ color, children }: Props) {
   const theme = useTheme();
-  const [springs, api] = useSpring(() => ({
+  let [springs, api] = useSpring(() => ({
     from: { backgroundColor: theme.colors.displayBackground },
   }));
   const priorColor = useRef(theme.colors.displayBackground);
@@ -26,7 +26,19 @@ function DisplayCard({ color, children }: Props) {
       });
       priorColor.current = color ?? theme.colors.displayBackground;
     }
-  }, [color, api, theme.colors.displayBackground]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [color]);
+  useEffect(() => {
+    api.start({
+      from: {
+        backgroundColor: priorColor.current,
+      },
+      to: {
+        backgroundColor: theme.colors.displayBackground,
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme]);
   const cardStyle = css`
     text-align: center;
     font-size: 72pt;

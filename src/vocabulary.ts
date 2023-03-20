@@ -34,7 +34,5 @@ export function getAnswerForMode(word: Word, mode: GameMode): string {
 }
 
 export function getWord(): Word {
-  const rnd = Math.random();
-  console.log(`Random: ${rnd}`);
-  return WORDS[Math.floor(rnd * WORDS.length)];
+  return WORDS[Math.floor(Math.random() * WORDS.length)];
 }
