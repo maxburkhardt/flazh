@@ -3,7 +3,7 @@ import { css, useTheme, Theme } from "@emotion/react";
 import { useState } from "react";
 import DisplayCard from "./DisplayCard";
 import { day } from "../theme";
-import { getDisplayForMode, getWord } from "../vocabulary";
+import { getAnswerForMode, getDisplayForMode, getWord } from "../vocabulary";
 import Button from "./Button";
 import TextEntryCard from "./TextEntryCard";
 import InputCard from "./InputCard";
@@ -30,6 +30,20 @@ function GameContainer({ updateTheme }: Props) {
   const [mode, setMode] = useState(0);
   const [currentWord, setCurrentWord] = useState(getWord());
   const [textEntry, setTextEntry] = useState("");
+  const evaluateAnswer = () => {
+    if (textEntry === getAnswerForMode(currentWord, gameModeSeq[mode])) {
+      // Correct!
+      setDisplayColor(theme.colors.success);
+      setTimeout(() => setDisplayColor(theme.colors.displayBackground), 500);
+      setTextEntry("");
+      setCurrentWord(getWord());
+    } else {
+      // Incorrect!
+      setDisplayColor(theme.colors.danger);
+      setTimeout(() => setDisplayColor(theme.colors.displayBackground), 500);
+      setTextEntry("");
+    }
+  };
   return (
     <div css={style}>
       <DisplayCard>{gameModeSeq[mode]}</DisplayCard>
@@ -39,23 +53,13 @@ function GameContainer({ updateTheme }: Props) {
       <TextEntryCard
         value={textEntry}
         onChange={(e) => setTextEntry(e.target.value)}
+        submitCallback={evaluateAnswer}
         lang="zh-Hans"
       />
       <InputCard>
+        <Button onClick={evaluateAnswer}>&nbsp;&rarr;&nbsp;</Button>
         <Button onClick={() => updateTheme(day)}>Change Theme</Button>
-        <Button
-          onClick={() => {
-            setDisplayColor(theme.colors.danger);
-            setTimeout(
-              () => setDisplayColor(theme.colors.displayBackground),
-              1000
-            );
-          }}
-        >
-          Danger
-        </Button>
         <Button onClick={() => setMode((mode + 1) % 3)}>Mode switch</Button>
-        <Button onClick={() => setCurrentWord(getWord())}>New word</Button>
       </InputCard>
     </div>
   );

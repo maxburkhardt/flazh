@@ -5,10 +5,11 @@ import InputCard from "./InputCard";
 export type Props = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  submitCallback: () => void;
   lang: "en" | "zh-Hans";
 };
 
-function TextEntryCard({ value, onChange, lang }: Props) {
+function TextEntryCard({ value, onChange, submitCallback, lang }: Props) {
   const theme = useTheme();
   const inputStyle = css`
     font-size: 72pt;
@@ -30,6 +31,12 @@ function TextEntryCard({ value, onChange, lang }: Props) {
         placeholder="..."
         value={value}
         onChange={onChange}
+        onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            submitCallback();
+          }
+        }}
+        autoFocus
       ></input>
     </InputCard>
   );
