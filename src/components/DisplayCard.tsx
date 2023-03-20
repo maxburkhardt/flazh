@@ -35,6 +35,7 @@ function DisplayCard({ color, children }: Props) {
     margin: 25px auto;
     background-color: ${theme.colors.displayBackground};
     color: ${theme.colors.displayForeground};
+    height: 1.5em;
   `;
   return (
     <animated.div css={cardStyle} style={{ ...springs }}>

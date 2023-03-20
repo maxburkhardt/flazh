@@ -3,7 +3,7 @@ import { css, useTheme, Theme } from "@emotion/react";
 import { useState } from "react";
 import DisplayCard from "./DisplayCard";
 import { day } from "../theme";
-import { getDisplayForMode, Word, WORDS } from "../vocabulary";
+import { getDisplayForMode, getWord } from "../vocabulary";
 import Button from "./Button";
 import TextEntryCard from "./TextEntryCard";
 import InputCard from "./InputCard";
@@ -13,6 +13,7 @@ export type Props = {
 };
 
 export type GameMode = "办法一" | "办法二" | "办法三";
+const gameModeSeq: Array<GameMode> = ["办法一", "办法二", "办法三"];
 
 function GameContainer({ updateTheme }: Props) {
   const theme = useTheme();
@@ -26,14 +27,14 @@ function GameContainer({ updateTheme }: Props) {
   const [displayColor, setDisplayColor] = useState(
     theme.colors.displayBackground
   );
-  const [mode, setMode] = useState<GameMode>("办法一");
-  const [currentWord, setCurrentWord] = useState<Word>(WORDS[0]);
+  const [mode, setMode] = useState(0);
+  const [currentWord, setCurrentWord] = useState(getWord());
   const [textEntry, setTextEntry] = useState("");
   return (
     <div css={style}>
-      <DisplayCard>{mode}</DisplayCard>
+      <DisplayCard>{gameModeSeq[mode]}</DisplayCard>
       <DisplayCard color={displayColor}>
-        {getDisplayForMode(currentWord, mode)}
+        {getDisplayForMode(currentWord, gameModeSeq[mode])}
       </DisplayCard>
       <TextEntryCard
         value={textEntry}
@@ -53,8 +54,8 @@ function GameContainer({ updateTheme }: Props) {
         >
           Danger
         </Button>
-        <Button onClick={() => setMode("办法二")}>Mode switch</Button>
-        <Button onClick={() => setCurrentWord(WORDS[1])}>New word</Button>
+        <Button onClick={() => setMode((mode + 1) % 3)}>Mode switch</Button>
+        <Button onClick={() => setCurrentWord(getWord())}>New word</Button>
       </InputCard>
     </div>
   );

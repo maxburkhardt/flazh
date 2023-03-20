@@ -6,7 +6,7 @@ export type Props = {
   children?: React.ReactNode;
 };
 
-function Button({ children }: Props) {
+function Button({ onClick, children }: Props) {
   const theme = useTheme();
   const style = css`
     background-color: ${theme.colors.displayBackground};
@@ -19,7 +19,11 @@ function Button({ children }: Props) {
       background-color: ${theme.colors.success};
     }
   `;
-  return <button css={style}>{children}</button>;
+  return (
+    <button css={style} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;
