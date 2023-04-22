@@ -11,12 +11,16 @@ const WORDS: Array<Word> = [
   { en: "read", zh: "读", tones: "2" },
 ];
 
-export function getDisplayForMode(word: Word, mode: GameMode): string {
+export function getDisplayForMode(
+  word: Word,
+  mode: GameMode,
+  showAnswer: boolean
+): string {
   switch (mode) {
     case "办法一":
-      return word.zh;
+      return showAnswer ? word.en : word.zh;
     case "办法二":
-      return word.en;
+      return showAnswer ? word.zh : word.en;
     case "办法三":
       return word.zh;
   }

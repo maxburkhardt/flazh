@@ -29,6 +29,7 @@ function GameContainer({ updateTheme }: Props) {
   );
   const [mode, setMode] = useState(0);
   const [currentWord, setCurrentWord] = useState(getWord());
+  const [showAnswer, setShowAnswer] = useState(false);
   const [textEntry, setTextEntry] = useState("");
   const evaluateAnswer = () => {
     if (textEntry === getAnswerForMode(currentWord, gameModeSeq[mode])) {
@@ -40,15 +41,19 @@ function GameContainer({ updateTheme }: Props) {
     } else {
       // Incorrect!
       setDisplayColor(theme.colors.danger);
-      setTimeout(() => setDisplayColor(theme.colors.displayBackground), 500);
+      setShowAnswer(true);
       setTextEntry("");
+      setTimeout(() => {
+        setDisplayColor(theme.colors.displayBackground);
+        setShowAnswer(false);
+      }, 1000);
     }
   };
   return (
     <div css={style}>
       <DisplayCard>{gameModeSeq[mode]}</DisplayCard>
       <DisplayCard color={displayColor}>
-        {getDisplayForMode(currentWord, gameModeSeq[mode])}
+        {getDisplayForMode(currentWord, gameModeSeq[mode], showAnswer)}
       </DisplayCard>
       <TextEntryCard
         value={textEntry}
