@@ -28,7 +28,8 @@
     "eject": "react-scripts eject",
     "format": "prettier --write .",
     "lint": "eslint --ext \".ts,.tsx\" src",
-    "getWords": "ts-node scripts/duolingo.ts"
+    "getWords": "ts-node scripts/duolingo.ts",
+    "parseCedict": "ts-node scripts/parse-cedict.ts"
   },
   "eslintConfig": {
     "extends": [
