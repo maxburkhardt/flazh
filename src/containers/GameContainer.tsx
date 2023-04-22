@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css, useTheme, Theme } from "@emotion/react";
 import { useState } from "react";
-import DisplayCard from "./DisplayCard";
+import DisplayCard from "../components/DisplayCard";
 import { day, night } from "../theme";
 import { getAnswerForMode, getDisplayForMode, getWord } from "../vocabulary";
-import Button from "./Button";
-import TextEntryCard from "./TextEntryCard";
-import InputCard from "./InputCard";
+import Button from "../components/Button";
+import TextEntryCard from "../components/TextEntryCard";
+import InputCard from "../components/InputCard";
 
 export type Props = {
   updateTheme: (t: Theme) => void;

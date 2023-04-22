@@ -1,4 +1,4 @@
-import { GameMode } from "./components/GameContainer";
+import { GameMode } from "./containers/GameContainer";
 
 export type Word = {
   en: string;
