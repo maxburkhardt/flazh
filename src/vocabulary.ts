@@ -1,15 +1,11 @@
 import { GameMode } from "./containers/GameContainer";
+import KNOWN_WORDS from "./resources/known_words.json"
 
 export type Word = {
   en: string;
   zh: string;
   tones: string;
 };
-
-const WORDS: Array<Word> = [
-  { en: "write", zh: "写", tones: "3" },
-  { en: "read", zh: "读", tones: "2" },
-];
 
 export function getDisplayForMode(
   word: Word,
@@ -38,5 +34,5 @@ export function getAnswerForMode(word: Word, mode: GameMode): string {
 }
 
 export function getWord(): Word {
-  return WORDS[Math.floor(Math.random() * WORDS.length)];
+  return KNOWN_WORDS[Math.floor(Math.random() * KNOWN_WORDS.length)];
 }

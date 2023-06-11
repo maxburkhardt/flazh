@@ -56,7 +56,7 @@ const main = async () => {
       console.log(`${word}: ${lookup.tones} ${lookup.en}`);
     }
   }
-  writeFileSync("data/known_words.json", JSON.stringify(knownWords));
+  writeFileSync("src/resources/known_words.json", JSON.stringify(knownWords));
 };
 
 main();
