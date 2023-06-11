@@ -1,5 +1,11 @@
-import { readFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import axios from "axios";
+
+interface Word {
+  en: string;
+  zh: string;
+  tones: string;
+}
 
 interface DuolingoResponse {
   language_data: {
@@ -18,6 +24,7 @@ interface DuolingoConfig {
 }
 
 const main = async () => {
+  // First, fetch known words from Duolingo
   const DUOLINGO_USER = JSON.parse(
     readFileSync("scripts/duolingo-account.json").toString()
   ) as DuolingoConfig;
@@ -33,7 +40,23 @@ const main = async () => {
   const words = userData.language_data.zs.skills
     .map((skill) => (skill.learned ? skill.words : []))
     .flat();
-  console.log(words);
+  // Write words out to the data directory
+  writeFileSync("data/known_zh.json", JSON.stringify(words));
+
+  // Now, look up those words in our dictionary
+  // Run `npm run parseCedict` if this doesn't exist
+  const cedict = JSON.parse(readFileSync("data/cedict.json").toString());
+  const knownWords: Word[] = [];
+  for (const word of words) {
+    const lookup = cedict[word];
+    if (!lookup) {
+      console.log(`[WARN] Couldn't find definition for ${word}`);
+    } else {
+      knownWords.push({ zh: word, en: lookup.en, tones: lookup.tones });
+      console.log(`${word}: ${lookup.tones} ${lookup.en}`);
+    }
+  }
+  writeFileSync("data/known_words.json", JSON.stringify(knownWords));
 };
 
 main();

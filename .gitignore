@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 scripts/duolingo-account.json
+scripts/notion-account.json
 data/
