@@ -40,15 +40,19 @@ function GameContainer({ updateTheme }: Props) {
       setCurrentWord(getWord());
     } else {
       // Incorrect!
-      showAnswer();
+      showAnswer(true);
     }
   };
-  const showAnswer = () => {
-    setDisplayColor(theme.colors.danger);
+  const showAnswer = (withColors: boolean) => {
+    if (withColors) {
+      setDisplayColor(theme.colors.danger);
+    }
     setAnswerShown(true);
     setTextEntry("");
     setTimeout(() => {
-      setDisplayColor(theme.colors.displayBackground);
+      if (withColors) {
+        setDisplayColor(theme.colors.displayBackground);
+      }
       setAnswerShown(false);
     }, 1000);
   };
@@ -66,7 +70,7 @@ function GameContainer({ updateTheme }: Props) {
       />
       <InputCard>
         <Button onClick={evaluateAnswer}>答</Button>
-        <Button onClick={showAnswer}>看</Button>
+        <Button onClick={() => showAnswer(false)}>看</Button>
         <Button onClick={() => setMode((mode + 1) % 3)}>变</Button>
         <Button onClick={() => updateTheme(day)}>早</Button>
         <Button onClick={() => updateTheme(night)}>晚</Button>
