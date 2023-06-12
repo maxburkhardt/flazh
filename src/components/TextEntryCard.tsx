@@ -18,6 +18,8 @@ function TextEntryCard({ value, onChange, submitCallback, lang }: Props) {
     color: ${theme.colors.inputForeground};
     border: none;
     text-align: center;
+    padding: 0;
+    margin: 0;
     :focus {
       outline: none;
     }
