@@ -21,7 +21,8 @@ function GameContainer({ updateTheme }: Props) {
     text-align: center;
     background-color: ${theme.colors.appBackground};
     height: 100vh;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   `;
   const [displayColor, setDisplayColor] = useState(
     theme.colors.displayBackground
