@@ -13,9 +13,10 @@ function Button({ onClick, children }: Props) {
     color: ${theme.colors.displayForeground};
     border: none;
     padding: 10px;
-    margin: 20px;
+    margin: 5px;
     font-size: 72pt;
     height: 2em;
+    vertical-align: middle;
     :hover {
       background-color: ${theme.colors.success};
     }

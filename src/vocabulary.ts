@@ -1,5 +1,5 @@
 import { GameMode } from "./containers/GameContainer";
-import KNOWN_WORDS from "./resources/known_words.json"
+import KNOWN_WORDS from "./resources/known_words.json";
 
 export type Word = {
   en: string;
@@ -18,7 +18,7 @@ export function getDisplayForMode(
     case "办法二":
       return showAnswer ? word.zh : word.en;
     case "办法三":
-      return word.zh;
+      return showAnswer ? word.tones : word.zh;
   }
 }
 

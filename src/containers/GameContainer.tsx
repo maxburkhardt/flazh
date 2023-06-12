@@ -19,7 +19,6 @@ function GameContainer({ updateTheme }: Props) {
   const theme = useTheme();
   const style = css`
     text-align: center;
-    min-width: 1000px;
     background-color: ${theme.colors.appBackground};
     height: 100vh;
     overflow: auto;
@@ -29,7 +28,7 @@ function GameContainer({ updateTheme }: Props) {
   );
   const [mode, setMode] = useState(0);
   const [currentWord, setCurrentWord] = useState(getWord());
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [answerShown, setAnswerShown] = useState(false);
   const [textEntry, setTextEntry] = useState("");
   const evaluateAnswer = () => {
     if (textEntry === getAnswerForMode(currentWord, gameModeSeq[mode])) {
@@ -40,20 +39,23 @@ function GameContainer({ updateTheme }: Props) {
       setCurrentWord(getWord());
     } else {
       // Incorrect!
-      setDisplayColor(theme.colors.danger);
-      setShowAnswer(true);
-      setTextEntry("");
-      setTimeout(() => {
-        setDisplayColor(theme.colors.displayBackground);
-        setShowAnswer(false);
-      }, 1000);
+      showAnswer();
     }
+  };
+  const showAnswer = () => {
+    setDisplayColor(theme.colors.danger);
+    setAnswerShown(true);
+    setTextEntry("");
+    setTimeout(() => {
+      setDisplayColor(theme.colors.displayBackground);
+      setAnswerShown(false);
+    }, 1000);
   };
   return (
     <div css={style}>
       <DisplayCard>{gameModeSeq[mode]}</DisplayCard>
-      <DisplayCard color={displayColor}>
-        {getDisplayForMode(currentWord, gameModeSeq[mode], showAnswer)}
+      <DisplayCard color={displayColor} shouldShrinkText>
+        {getDisplayForMode(currentWord, gameModeSeq[mode], answerShown)}
       </DisplayCard>
       <TextEntryCard
         value={textEntry}
@@ -62,10 +64,11 @@ function GameContainer({ updateTheme }: Props) {
         lang="zh-Hans"
       />
       <InputCard>
-        <Button onClick={evaluateAnswer}>&nbsp;&rarr;&nbsp;</Button>
-        <Button onClick={() => updateTheme(day)}>&#x2600;</Button>
-        <Button onClick={() => updateTheme(night)}>&#x263e;</Button>
-        <Button onClick={() => setMode((mode + 1) % 3)}>&#x2398;</Button>
+        <Button onClick={evaluateAnswer}>答</Button>
+        <Button onClick={showAnswer}>看</Button>
+        <Button onClick={() => setMode((mode + 1) % 3)}>变</Button>
+        <Button onClick={() => updateTheme(day)}>早</Button>
+        <Button onClick={() => updateTheme(night)}>晚</Button>
       </InputCard>
     </div>
   );

@@ -5,10 +5,11 @@ import { useEffect, useRef } from "react";
 
 export type Props = {
   color?: string;
+  shouldShrinkText?: boolean;
   children?: React.ReactNode;
 };
 
-function DisplayCard({ color, children }: Props) {
+function DisplayCard({ color, shouldShrinkText, children }: Props) {
   const theme = useTheme();
   let [springs, api] = useSpring(() => ({
     from: { backgroundColor: theme.colors.displayBackground },
@@ -48,8 +49,19 @@ function DisplayCard({ color, children }: Props) {
     background-color: ${theme.colors.displayBackground};
     color: ${theme.colors.displayForeground};
   `;
+  const resizeStyle = css`
+    @media (max-width: 1000px) {
+      font-size: 48pt;
+    }
+  `;
+  const compositedCss = shouldShrinkText
+    ? css`
+        ${cardStyle};
+        ${resizeStyle};
+      `
+    : cardStyle;
   return (
-    <animated.div css={cardStyle} style={{ ...springs }}>
+    <animated.div css={compositedCss} style={{ ...springs }}>
       {children}
     </animated.div>
   );
