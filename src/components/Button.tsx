@@ -20,6 +20,9 @@ function Button({ onClick, children }: Props) {
     :hover {
       background-color: ${theme.colors.success};
     }
+    @media (max-width: 1000px) {
+      font-size: 48pt;
+    }
   `;
   return (
     <button css={style} onClick={onClick}>
