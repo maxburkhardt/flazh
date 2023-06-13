@@ -48,6 +48,8 @@ function DisplayCard({ color, shouldShrinkText, children }: Props) {
     margin: 25px auto;
     background-color: ${theme.colors.displayBackground};
     color: ${theme.colors.displayForeground};
+    white-space: nowrap;
+    overflow: scroll;
   `;
   const resizeStyle = css`
     @media (max-width: 1000px) {
