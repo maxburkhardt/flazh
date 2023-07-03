@@ -57,6 +57,12 @@ const main = async () => {
     }
   }
   writeFileSync("src/resources/known_words.json", JSON.stringify(knownWords));
+  // Now make a TSV for import into Anki
+  let tsv = "";
+  for (const word of knownWords) {
+    tsv += `${word.zh}\t${word.en}\t${word.tones}\n`;
+  }
+  writeFileSync("data/known_zh.tsv", tsv);
 };
 
 main();
