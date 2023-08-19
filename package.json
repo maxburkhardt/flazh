@@ -29,7 +29,8 @@
     "format": "prettier --write .",
     "lint": "eslint --ext \".ts,.tsx\" src",
     "getWords": "ts-node scripts/duolingo.ts",
-    "parseCedict": "ts-node scripts/parse-cedict.ts"
+    "parseCedict": "ts-node scripts/parse-cedict.ts",
+    "getWordsCumulative": "ts-node scripts/cumulative-duolingo.ts"
   },
   "eslintConfig": {
     "extends": [
