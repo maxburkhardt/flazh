@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, readdirSync } from "fs";
-//import axios from "axios";
+import axios from "axios";
 
 interface Word {
   en: string;
@@ -18,15 +18,9 @@ interface DuolingoResponse {
   };
 }
 
-/*
 interface DuolingoConfig {
   login: string;
   jwt: string;
-}
-*/
-
-function duolingoResponseShim(): DuolingoResponse {
-  return JSON.parse(readFileSync("./data/raw_duolingo.json").toString());
 }
 
 function generateNewFilename(): string {
@@ -52,7 +46,6 @@ function readAllPrevious(): Set<string> {
 const main = async () => {
   // First, fetch known words from Duolingo
 
-  /*
   const DUOLINGO_USER = JSON.parse(
     readFileSync("scripts/duolingo-account.json").toString()
   ) as DuolingoConfig;
@@ -65,9 +58,6 @@ const main = async () => {
       },
     })
   ).data as DuolingoResponse;
-  writeFileSync("data/raw_duolingo.json", JSON.stringify(userData))
-  */
-  const userData = duolingoResponseShim();
   const duolingoWords = userData.language_data.zs.skills
     .map((skill) => (skill.learned ? skill.words : []))
     .flat();
